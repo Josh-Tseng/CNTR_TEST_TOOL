@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ChargeON 序號讀寫工具 (含 CRC16)</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        .panel { border: 1px solid #ccc; padding: 15px; border-radius: 8px; max-width: 550px; margin-bottom: 20px; }
+        input[type="text"] { width: 100%; padding: 8px; margin: 5px 0 15px 0; box-sizing: border-box; }
+        button { padding: 8px 15px; margin-right: 5px; cursor: pointer; }
+        hr { margin: 20px 0; border: 0; border-top: 1px solid #eee; }
+    </style>
+</head>
+<body>
+    <h1>ChargeON 序號讀寫 (CRC16 協議版)</h1>
+    
+    <div class="panel">
+        <h3>1. 通訊連線</h3>
+        <p>狀態: <span id="status" style="color: red; font-weight: bold;">未連線</span></p>
+        <button id="connect">開始連線</button>
+
+        <hr>
+
+        <h3>2. 序號讀取與顯示</h3>
+        <button id="readSN" disabled>讀取控制器序號</button>
+        <br><br>
+        <label>目前控制器序號:</label>
+        <input type="text" id="currentSN" readonly style="background-color: #eee;" placeholder="點擊上方按鈕讀取">
+        
+        <hr>
+
+        <h3>3. 序號寫入 (Bootloader 安全機制)</h3>
+        <input type="text" id="newSN" placeholder="輸入新序號 (例如: G09DS37100DPT037)">
+        <button id="writeSN" disabled>寫入新序號</button>
+
+        <hr>
+
+        <h3>4. 即時通訊日誌</h3>
+        <div id="logDisplay" style="background-color: #1e1e1e; color: #00ff00; padding: 10px; font-family: monospace; font-size: 12px; height: 150px; overflow-y: auto; border-radius: 4px; white-space: pre-wrap;">等待通訊...</div>
+    </div>
+
+    <script src="protocol.js"></script>
+
+</body>
+</html>
