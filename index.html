@@ -12,11 +12,29 @@
 </head>
 <body>
     <h1>ChargeON 序號讀寫 (CRC16 協議版)</h1>
-    
     <div class="panel">
         <h3>1. 通訊連線</h3>
+        <div style="background-color: #e8f4fd; padding: 10px; border-left: 4px solid #007bff; font-size: 14px; margin-bottom: 10px;">
+            💡 <b>連線指南：</b><br>
+            • 按下<b>開始連線</b>鈕後，會跳出所有可以連線設備的視窗。<br>
+            • <b>若要連線新設備：</b>請在視窗中選擇 <b>GWA_BLE_KEY</b> 進行環境掃描。<br>
+            • <b>若要連線舊設備：</b>視窗中會列出您曾經連線過的控制器，點選即可「直接連線」跳過掃描。
+        </div>
+
+        <div style="margin-bottom: 15px; padding: 12px; background: #fff3cd; border: 1px solid #ffeeba; border-radius: 5px;">
+            🔌 目前綁定設備: <span id="activeDeviceLabel" style="font-weight: bold; color: #856404; font-size: 16px;">無 (請先連線)</span>
+        </div>
+        
         <p>狀態: <span id="status" style="color: red; font-weight: bold;">未連線</span></p>
         <button id="connect">開始連線</button>
+        <button id="clearCacheBtn" style="margin-left: 10px; font-size: 12px; background: #6c757d; color: white; border: none; padding: 5px 10px; border-radius: 4px;">清除記憶設備</button>
+
+
+        <div id="proxyScanArea" style="display:none; margin-top:10px; background:#f8f9fa; padding:10px; border:1px dashed #ccc;">
+            <p>📡 附近控制器清單 (由 ESP32 掃描中):</p>
+            <select id="deviceList" style="width:100%; padding:5px;"></select>
+            <button id="selectDeviceBtn" style="margin-top:5px; background:#007bff; color:white; border:none; padding:5px 10px; border-radius:4px;">確認連線此設備</button>
+        </div>
 
         <hr>
 
@@ -31,6 +49,11 @@
         <h3>3. 序號寫入 (Bootloader 安全機制)</h3>
         <input type="text" id="newSN" placeholder="輸入新序號 (例如: G09DS37100DPT037)">
         <button id="writeSN" disabled>寫入新序號</button>
+
+        <button id="stressTestBtn" disabled style="background-color: #ff9800; color: white; margin-left: 10px; border: none; border-radius: 4px;">進行壓力測試 (4097次)</button>
+        <button id="stopStressBtn" disabled style="background-color: #dc3545; color: white; margin-left: 5px; border: none; border-radius: 4px; padding: 8px 15px; cursor: pointer;">停止測試</button>
+        <button id="exportLogBtn" style="background-color: #28a745; color: white; margin-left: 5px; border: none; border-radius: 4px; padding: 8px 15px; cursor: pointer;">📥 匯出完整日誌</button>
+        <p id="stressResult" style="font-weight: bold; color: #0056b3; display: none; background: #e3f2fd; padding: 10px; border-radius: 4px; margin-top: 15px;"></p>
 
         <hr>
 
